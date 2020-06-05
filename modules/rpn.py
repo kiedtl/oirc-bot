@@ -34,7 +34,7 @@ async def rpninp(self, chan, nick, msg):
     
 
 async def init(self):
-  self.help['rpn'] = ['rpn <inp> - simple reverse polish notation calculator (more)', 'it has an alias of . so you can just do {}. <inp> and also there are 4 f8jct90js (+|a) (-|s) (*|x|m) (/|d) and p to print register 0'.format(self.prefix)]
+  self.help['rpn'] = ['rpn <inp> - simple reverse polish notation calculator (more)', 'it has an alias of . so you can just do {}. <inp> and also there are 4 functions, add (+|a), subtract (-|s), multiply (*|x|m), and devide (/|d), and p to print register 0'.format(self.prefix)]
   self.cmd['rpn'] = rpninp
   self.cmd['.'] = rpninp
   
