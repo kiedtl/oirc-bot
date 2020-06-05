@@ -11,23 +11,24 @@ async def quit(self, chan, source, msg):
 
 
 async def reloadmods(self, chan, source, msg):
-  await self.message(chan, 'reloading modules...')
+  await self.message(chan, '[\x036admin\x0f] reloading modules...')
   self.cmd = {}
   self.raw = {}
   self.help = {}
   for i in self.modules:
     importlib.reload(self.modules[i])
     await self.modules[i].init(self)
-  await self.message(chan, 'done! did something break? if so you might need to restart')
+    #await self.message(chan, '[\x036admin\x0f] load {} sucess!'.format(i))
+  await self.message(chan, '[\x036admin\x0f] done! {} modules reloaded!'.format(len(self.modules)))
 
   
 
 async def part(self, chan, source, msg):
-  await self.message(chan, 'bye {}'.format(msg))
+  await self.message(chan, '[\x036admin\x0f] bye {}'.format(msg))
   await self.part(msg)
 
 async def join(self, chan, source, msg):
-  await self.message(chan, 'joined {}'.format(msg))
+  await self.message(chan, '[\x036admin\x0f] joined {}'.format(msg))
   await self.join(msg)
 
 async def joins(self, chan, source, msg):
@@ -47,17 +48,21 @@ async def aexec(self, code):
 
 async def ev(self, chan, source, msg):
   msg = msg.split(' ')
-  await aexec(self, ' '.join(msg))
-  await self.message(chan, 'ok')
+  try:
+    await self.message(chan, '[\x036admin\x0f] ok, output: {}'.format(
+        str(await aexec(self, ' '.join(msg)))
+      ))
+  except:
+    await self.message(chan, '[\x036admin\x0f] exception in eval!')
 
 async def send(self, c, n, m):
   msg = m.split(' ')
   await self.message(msg.pop(0), ' '.join(msg))
-  await self.message(c, 'ok')
+  await self.message(c, '[\x036admin\x0f] sent')
 
 async def shut(self, c, n, m):
   self.qtime[c] = time.time()+(60*10)
-  await self.message(c, 'Ok, il be back')
+  await self.message(c, '[\x036admin\x0f] Ok, il be back in 10 minutes')
 
 commands = {
   'quit': quit,

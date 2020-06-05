@@ -4,17 +4,17 @@
 async def helpParse(self, c, n, m):
   if m in self.help:
     self.more[c] = self.help[m][1]
-    await self.message(c, self.help[m][0])
+    await self.message(c, '[\x036help\x0f] '+self.help[m][0])
   else:
-    await self.message(c, 'commands: {}'.format(' '.join([i for i in self.help if not ' ' in i])))
+    await self.message(c, '[\x036help\x0f] my nice commands are {}'.format(', '.join([i for i in self.help if not ' ' in i])))
 
 
 async def more(self, c, n, m):
   if c in self.more:
-    await self.message(c, self.more.pop(c))
+    await self.message(c, '[\x036help\x0f] '+self.more.pop(c))
     return
   else:
-    await self.message(c, 'there is no more more text lmao stop')
+    await self.message(c, '[\x036help\x0f] there is no more more text lmao stop')
 
 
 async def init(self):
