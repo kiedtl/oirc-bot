@@ -21,6 +21,10 @@ class Oven(pydle.Client):
       await self.join(i)
     print('Done!')
 
+    # tilde +B bot
+    await self.set_mode(self.nickname, '+B')
+
+
   async def loadMods(self):
     for i in [s for s in os.listdir('modules') if ".py" in s and '.swp' not in s]:
       i = i[:-3]
