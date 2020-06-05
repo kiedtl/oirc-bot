@@ -14,7 +14,7 @@ async def rpninp(self, chan, nick, msg):
   if chan not in self.rpnhist:
     self.rpnhist[chan] = [0]
   self.rpnhist[chan].append(0)
-  del self.rpnhist[chan][100:]
+  del self.rpnhist[chan][15:]
   if isfloat(msg):
     self.rpnhist[chan].insert(0, float(msg))
     return
@@ -31,6 +31,9 @@ async def rpninp(self, chan, nick, msg):
       self.rpnhist[chan][0] = float('NaN')
   elif msg == 'p':
     pass # just dont do anything lol
+  elif msg == 'r':
+    await self.message(chan, '[\x036rpn\x0f] {}'.format(str(self.rpnhist[chan])))
+    return
   else:
     return
   await self.message(chan, '[\x036rpn\x0f] '+str(self.rpnhist[chan][0]))
