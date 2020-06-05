@@ -22,7 +22,7 @@ class Oven(pydle.Client):
     print('Done!')
 
   async def loadMods(self):
-    for i in [s for s in os.listdir('modules') if ".py" in s]:
+    for i in [s for s in os.listdir('modules') if ".py" in s and '.swp' not in s]:
       i = i[:-3]
       print('loading', i)
       m = __import__("modules."+i)
