@@ -24,11 +24,16 @@ async def rpninp(self, chan, nick, msg):
     self.rpnhist[chan][0] =  self.rpnhist[chan].pop(1)-self.rpnhist[chan][0]
   elif msg == '*' or msg == 'x' or msg == 'm':
     self.rpnhist[chan][0] =  self.rpnhist[chan].pop(1)*self.rpnhist[chan][0]
+
   elif msg == '/' or msg == 'd':
     try:
       self.rpnhist[chan][0] =  self.rpnhist[chan].pop(1)/self.rpnhist[chan][0]
     except ZeroDivisionError:
       self.rpnhist[chan][0] = float('NaN')
+
+  elif msg == '^' or msg == 'e':
+    self.rpnhist[chan][0] =  self.rpnhist[chan].pop(1)**self.rpnhist[chan][0]
+
   elif msg == 'p':
     pass # just dont do anything lol
   elif msg == 'r':
