@@ -1,4 +1,4 @@
-# o-bot
+# oirc-bot
 
 general purpose bot lol it does cool things
 
