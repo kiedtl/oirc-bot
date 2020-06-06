@@ -8,5 +8,5 @@ general purpose bot lol it does cool things
 3. set admins and nickname and stuff in the bottom of `bot.py`
 
 ## other bots that use the oirc-bot framework
-- [kiedtl/ircbot](/kiedtl/ircbot/)
+- [kiedtl/ircbot](//github.com/kiedtl/ircbot/)
 
