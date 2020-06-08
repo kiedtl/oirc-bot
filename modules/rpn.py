@@ -38,21 +38,34 @@ async def rpninp(self, chan, nick, msg):
     elif msg == 'p':
       pass # just dont do anything lol
     elif msg == 'r':
-      await self.message(chan, '[\x036rpn\x0f] {}'.format(str(self.rpnhist[chan])))
+      if chan in self.rpnprint:
+        await self.message(chan, '[\x036rpn\x0f] {}'.format(str(self.rpnhist[chan])))
       return
     else:
       return
   except OverflowError:
-    await self.message(chan, '[\x036rpn\x0f] no u ur numbers are too phat')
+    if chan in self.rpnprint:
+      await self.message(chan, '[\x036rpn\x0f] no u ur numbers are too phat')
     return
-  await self.message(chan, '[\x036rpn\x0f] '+str(self.rpnhist[chan][0]))
-    
+  if chan in self.rpnprint:
+    await self.message(chan, '[\x036rpn\x0f] '+str(self.rpnhist[chan][0]))
+
+async def rpntoggle(self, chan, nick, msg):
+  if chan in self.rpnprint:
+    self.rpnprint.remove(chan)
+    await self.message(chan, '[\x036rpn\x0f] rpn outputting has been disabled')
+  else:
+    self.rpnprint.append(chan)
+    await self.message(chan, '[\x036rpn\x0f] rpn outputting has been enabled') 
 
 async def init(self):
   self.help['rpn'] = ['rpn <inp> - simple reverse polish notation calculator (more)', 'it has an alias of . so you can just do {}. <inp>, and if enabled it will also parse floats and functions as input. there are 4 functions, add (+|a), subtract (-|s), multiply (*|x|m), and devide (/|d), and p to print register 0'.format(self.prefix)]
   self.cmd['rpn'] = rpninp
   self.cmd['.'] = rpninp
   self.raw['rpn'] = rpninp
+  self.cmd['rt'] = rpntoggle
+  self.help['rt'] = ['rt - toggle the output of rpn calculatons into the channel', 'rpn is cool']
 
   self.rpnhist = {}
-  
+
+  self.rpnprint = []
