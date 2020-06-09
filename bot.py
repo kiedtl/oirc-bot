@@ -47,7 +47,7 @@ class Oven(pydle.Client):
 
 
 
-      if msg == '!botlist':
+      if msg == '!botlist' or msg == '!rollcall':
         await self.message(chan, 'helo im owen\'s nice bot')
       if msg[:len(self.prefix)] == self.prefix:
 
